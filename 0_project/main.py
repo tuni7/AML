@@ -29,7 +29,7 @@ test_data = _test_data.values.astype(np.float32)
 train_labels = train_data[:, -1]
 train_data = np.delete(train_data, -1, axis=1)
 
-N = int(len(train_data))
+N = int(len(train_data)*0.8)
 train_x = torch.tensor(train_data[:N])
 train_y = torch.tensor(train_labels[:N])
 val_x = torch.tensor(train_data[N:])
@@ -63,7 +63,7 @@ for k in range(epochs):
         label = pred.argmax(dim=0)
         if (label == val_y[i].squeeze().long()):
             correct += 1
-    # print(f"Epoch: {k}: validation accuracy: {round(correct/len(val_y), 2)}")
+    print(f"Epoch: {k}: validation accuracy: {round(correct/len(val_y), 2)}")
 
 
 model.eval()
